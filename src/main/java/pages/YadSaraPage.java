@@ -1,6 +1,7 @@
 package pages;
 
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +16,7 @@ public class YadSaraPage {
     public boolean isOnOpen(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         try{
-            wait.until(ExpectedConditions.visibilityOf(getName()));
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("WelcomLogo"))));
             return true;
         }catch (Exception e){
             return false;
@@ -26,7 +27,6 @@ public class YadSaraPage {
         PageFactory.initElements(driver, this);
     }
     WebDriver driver;
-
 
     @FindBy(id="ClientNameTxt")
     private WebElement name;
@@ -64,13 +64,22 @@ public class YadSaraPage {
     @FindBy(id="PayBtBt")
     private WebElement paymentSubmit;
 
+    public boolean findAlert(){
+        try{
+            paymentApprovalAlert= driver.findElement(By.className("sweet-alert"));
+            paymentApprovalButton=driver.findElement(By.xpath(paymentApprovalAlert+"/p/span"));
+//            PaymentApprovalText=driver.findElement(By.className("confirm"));
+            return  true;
+        }catch (Exception e){
+            return  false;
+        }
+    }
 
-    @FindBy(className="sweet-alert showSweetAlert visible")
     private WebElement paymentApprovalAlert;
-    @FindBy(className="confirm")
+//    @FindBy(className="confirm")
     private WebElement paymentApprovalButton;
-    @FindBy(className="confirm")
-    private WebElement getPaymentApprovalText;
+//    @FindBy(className="confirm")
+    private WebElement PaymentApprovalText;
 
 
 

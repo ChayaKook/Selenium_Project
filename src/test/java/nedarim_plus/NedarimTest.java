@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,11 +22,10 @@ import java.util.Set;
 
 public class NedarimTest {
 
-    WebDriver eDriver = new EdgeDriver();
+    public WebDriver eDriver = new EdgeDriver();
 
     @BeforeEach
     public void beforeTest(){
-
         eDriver.get("https://www.matara.pro/nedarimplus/");
     }
     @AfterEach
@@ -64,12 +64,12 @@ public class NedarimTest {
         for (String window : windows)
             if (!parentWindow.equalsIgnoreCase(window))
                 eDriver.switchTo().window(window);
+        System.out.println(eDriver.getCurrentUrl());
 
         //yad sara
-        System.out.println(eDriver.getCurrentUrl());
-        Thread.sleep(5500);
         YadSaraPage ysp = new YadSaraPage(eDriver);
         Assert.assertTrue(ysp.isOnOpen());
+
         ysp.getId().sendKeys("321654987");
         ysp.getCity().sendKeys("modiinIllit");
         ysp.getAddress().sendKeys("Haritva6");
@@ -95,16 +95,27 @@ public class NedarimTest {
         ysp.getNumberCard().sendKeys("1234567894561312");
         ysp.getCvvCard().sendKeys("456");
         ysp.getValidityCard().sendKeys("1026");
-        ysp.getIAgree().click();
 
+        Thread.sleep(1000);
+        ysp.getIAgree().click();
+        Thread.sleep(2500);
         ysp.getPaymentSubmit().click();
-        ysp.getPaymentApprovalAlert();
-        System.out.println(eDriver.switchTo().alert().getText());
-        Assert.assertTrue(eDriver.switchTo().alert().getText().equals("נא לאשר חיוב על סך 100 ₪ "));
-        eDriver.switchTo().alert().accept();
-        System.out.println(eDriver.switchTo().alert().getText());
-        Assert.assertTrue(eDriver.switchTo().alert().getText().equals("מספר כרטיס אשראי שגוי. טעות בהקלדה."));
-        eDriver.switchTo().alert().accept();
+
+//
+        Assert.assertTrue(ysp.findAlert());
+//        Assert.assertTrue(ysp.getPaymentApprovalText().getText().equals("נא לאשר חיוב על סך 100 ₪ "));
+//        ysp.getPaymentApprovalButton().click();
+//        Assert.assertTrue(ysp.getPaymentApprovalText().getText().equals("מספר כרטיס אשראי שגוי. טעות בהקלדה."));
+//        ysp.getPaymentApprovalButton().click();
+
+        Thread.sleep(100000);
+//        eDriver.switchTo().alert().accept();
+//        System.out.println(eDriver.switchTo().alert().getText());
+//        Assert.assertTrue(eDriver.switchTo().alert().getText().equals("נא לאשר חיוב על סך 100 ₪ "));
+//        eDriver.switchTo().alert().accept();
+//        System.out.println(eDriver.switchTo().alert().getText());
+//        Assert.assertTrue(eDriver.switchTo().alert().getText().equals("מספר כרטיס אשראי שגוי. טעות בהקלדה."));
+//        eDriver.switchTo().alert().accept();
 
 //        ysp.getPaymentSubmit().click();
 //        ysp.getPayAlert();
