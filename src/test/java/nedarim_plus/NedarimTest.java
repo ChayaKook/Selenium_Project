@@ -101,30 +101,18 @@ public class NedarimTest {
         Thread.sleep(2500);
         ysp.getPaymentSubmit().click();
 
-//
         Assert.assertTrue(ysp.findAlert());
-//        Assert.assertTrue(ysp.getPaymentApprovalText().getText().equals("נא לאשר חיוב על סך 100 ₪ "));
-//        ysp.getPaymentApprovalButton().click();
-//        Assert.assertTrue(ysp.getPaymentApprovalText().getText().equals("מספר כרטיס אשראי שגוי. טעות בהקלדה."));
-//        ysp.getPaymentApprovalButton().click();
-
-        Thread.sleep(100000);
-//        eDriver.switchTo().alert().accept();
-//        System.out.println(eDriver.switchTo().alert().getText());
-//        Assert.assertTrue(eDriver.switchTo().alert().getText().equals("נא לאשר חיוב על סך 100 ₪ "));
-//        eDriver.switchTo().alert().accept();
-//        System.out.println(eDriver.switchTo().alert().getText());
-//        Assert.assertTrue(eDriver.switchTo().alert().getText().equals("מספר כרטיס אשראי שגוי. טעות בהקלדה."));
-//        eDriver.switchTo().alert().accept();
-
-//        ysp.getPaymentSubmit().click();
-//        ysp.getPayAlert();
-//        System.out.println(ysp.getPayAlert().getText());
-//        Assert.assertTrue(ysp.getPayAlert().getText().equals("נא לאשר חיוב על סך 100 ₪ "));
-//        ysp.getPayAlert().accept();
-//        System.out.println(ysp.getPayAlert().getText());
-//        Assert.assertTrue(ysp.getPayAlert().getText().equals("מספר כרטיס אשראי שגוי. טעות בהקלדה."));
-//        ysp.getPayAlert().accept();
+        System.out.println(ysp.getPaymentApprovalText().getText());
+        Assert.assertTrue(ysp.getPaymentApprovalText().getText().equals("נא לאשר חיוב על סך 100 ₪"));
+        Thread.sleep(2000);
+        ysp.getPaymentApprovalButton().click();
+        Thread.sleep(2000);
+        System.out.println(ysp.getPaymentApprovalError().getText());
+        Thread.sleep(1000);
+        Assert.assertTrue(ysp.getPaymentApprovalError().getText().equals("מספר כרטיס אשראי שגוי. טעות בהקלדה."));
+        ysp.getPaymentApprovalButton().click();
+        Assert.assertTrue(ysp.isOnOpen());
+        Thread.sleep(1000);
 
     }
 }

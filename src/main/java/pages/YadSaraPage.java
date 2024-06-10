@@ -67,8 +67,10 @@ public class YadSaraPage {
     public boolean findAlert(){
         try{
             paymentApprovalAlert= driver.findElement(By.className("sweet-alert"));
-            paymentApprovalButton=driver.findElement(By.xpath(paymentApprovalAlert+"/p/span"));
-//            PaymentApprovalText=driver.findElement(By.className("confirm"));
+            PaymentApprovalText=driver.findElement(By.xpath("html/body/div/div/p/span"));
+            paymentApprovalButton=driver.findElement(By.className("confirm"));
+            PaymentApprovalError=driver.findElement(By.xpath("html/body/div/div/p"));
+            System.out.println(paymentApprovalButton.getText());
             return  true;
         }catch (Exception e){
             return  false;
@@ -80,6 +82,7 @@ public class YadSaraPage {
     private WebElement paymentApprovalButton;
 //    @FindBy(className="confirm")
     private WebElement PaymentApprovalText;
+    private WebElement PaymentApprovalError;
 
 
 
